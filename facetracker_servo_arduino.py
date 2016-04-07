@@ -112,10 +112,23 @@ if __name__ == '__main__':
     if input_name.isdigit():
         capture = cv.CreateCameraCapture(int(input_name))
     else:
-        print "We need a camera input! Specify camera index e.g. 0"
-        sys.exit(0)
+       capture = None
  
     cv.NamedWindow("result", 1)
+    
+    #size of the video
+    width = 160
+    height = 120
+
+    if width is None:
+    width = int(cv.GetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_WIDTH))
+    else:
+    cv.SetCaptureProperty(capture,cv.CV_CAP_PROP_FRAME_WIDTH,width)
+
+    if height is None:
+    height = int(cv.GetCaptureProperty(capture, cv.CV_CAP_PROP_FRAME_HEIGHT))
+    else:
+    cv.SetCaptureProperty(capture,cv.CV_CAP_PROP_FRAME_HEIGHT,height)
  
     if capture:
         frame_copy = None
